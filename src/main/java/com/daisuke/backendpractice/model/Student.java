@@ -7,6 +7,10 @@ public class Student {
     private String name;
     private String major;
 
+    public Student() {
+
+    }
+
     public Student(int id, String name, String major) {
         this.id = id;
         this.name = name;
@@ -23,5 +27,17 @@ public class Student {
 
     public String getMajor() {
         return this.major;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 }
