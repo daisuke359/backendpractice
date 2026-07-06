@@ -21,9 +21,9 @@ public class StudentService {
     }
 
     public Student getStudent(int id) {
-        for(int i=0;i<students.size();i++) {
-            if(students.get(i).getId()==id) {
-                return students.get(i);
+        for(Student student : students) {
+            if(student.getId()==id) {
+                return student;
             }
         }
         return null;
@@ -47,11 +47,11 @@ public class StudentService {
 
 
     public Student updateStudent(int id, Student student) {
-        for(int i=0;i<students.size();i++) {
-            if(students.get(i).getId()==id) {
-                students.get(i).setName(student.getName());
-                students.get(i).setMajor(student.getMajor());
-                return students.get(i);
+        for(Student s : students) {
+            if(s.getId()==id) {
+                s.setName(student.getName());
+                s.setMajor(student.getMajor());
+                return s;
             }
         }
         return null;

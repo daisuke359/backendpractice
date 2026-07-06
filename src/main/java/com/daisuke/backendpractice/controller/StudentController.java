@@ -1,0 +1,61 @@
+package com.daisuke.backendpractice.controller;
+
+import com.daisuke.backendpractice.model.Student;
+import com.daisuke.backendpractice.service.StudentService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class StudentController {
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello, Spring Boot!";
+    }
+
+    @GetMapping("/students")
+    public List<Student> getStudents() {
+        return studentService.getStudents();
+    }
+
+    @GetMapping("/students/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable int id) {
+        Student student = studentService.getStudent(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student);
+    }
+
+    @PostMapping("/students")
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+        return ResponseEntity.ok(studentService.addStudent(student));
+    }
+
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable int id) {
+        Student student = studentService.deleteStudent(id);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(student);
+    }
+
+    @PutMapping("/students/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
+        Student stuToUpdate = studentService.updateStudent(id, student);
+        if (stuToUpdate == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(stuToUpdate);
+    }
+
+}
