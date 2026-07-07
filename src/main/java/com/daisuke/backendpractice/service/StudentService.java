@@ -1,5 +1,6 @@
 package com.daisuke.backendpractice.service;
 
+import com.daisuke.backendpractice.exception.StudentNotFoundException;
 import com.daisuke.backendpractice.model.Student;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class StudentService {
                 return student;
             }
         }
-        return null;
+        throw new StudentNotFoundException(id);
     }
 
 
@@ -42,7 +43,7 @@ public class StudentService {
                 return students.remove(i);
             }
         }
-        return null;
+        throw new StudentNotFoundException(id);
     }
 
 
@@ -54,6 +55,6 @@ public class StudentService {
                 return s;
             }
         }
-        return null;
+        throw new StudentNotFoundException(id);
     }
 }

@@ -16,11 +16,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, Spring Boot!";
-    }
-
     @GetMapping("/students")
     public List<Student> getStudents() {
         return studentService.getStudents();
@@ -28,11 +23,7 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable int id) {
-        Student student = studentService.getStudent(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
+        return ResponseEntity.ok(studentService.getStudent(id));
     }
 
     @PostMapping("/students")
@@ -42,20 +33,12 @@ public class StudentController {
 
     @DeleteMapping("/students/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable int id) {
-        Student student = studentService.deleteStudent(id);
-        if (student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(student);
+        return ResponseEntity.ok(studentService.deleteStudent(id));
     }
 
     @PutMapping("/students/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
-        Student stuToUpdate = studentService.updateStudent(id, student);
-        if (stuToUpdate == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(stuToUpdate);
+        return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 
 }
