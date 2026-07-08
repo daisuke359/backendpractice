@@ -2,6 +2,7 @@ package com.daisuke.backendpractice.controller;
 
 import com.daisuke.backendpractice.model.Student;
 import com.daisuke.backendpractice.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> addStudent(@Valid @RequestBody Student student) {
         return ResponseEntity.ok(studentService.addStudent(student));
     }
 
@@ -37,7 +38,7 @@ public class StudentController {
     }
 
     @PutMapping("/students/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@PathVariable int id, @Valid @RequestBody Student student) {
         return ResponseEntity.ok(studentService.updateStudent(id, student));
     }
 

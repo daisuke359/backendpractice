@@ -1,10 +1,15 @@
 package com.daisuke.backendpractice.model;
 
-import java.util.Formatter;
+import jakarta.validation.constraints.NotBlank;
+
 
 public class Student {
     private int id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String major;
 
     public Student() {
