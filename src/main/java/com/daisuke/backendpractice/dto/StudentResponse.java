@@ -1,18 +1,17 @@
-package com.daisuke.backendpractice.model;
+package com.daisuke.backendpractice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-
-public class Student {
+public class StudentResponse {
     private int id;
     private String name;
     private String major;
 
-    public Student() {
+    public StudentResponse() {
 
     }
 
-    public Student(int id, String name, String major) {
+    public StudentResponse(int id, String name, String major) {
         this.id = id;
         this.name = name;
         this.major = major;
@@ -41,4 +40,5 @@ public class Student {
     public void setMajor(String major) {
         this.major = major;
     }
+
 }

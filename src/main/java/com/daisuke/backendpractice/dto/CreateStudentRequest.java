@@ -1,25 +1,20 @@
-package com.daisuke.backendpractice.model;
+package com.daisuke.backendpractice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-
-public class Student {
-    private int id;
+public class CreateStudentRequest {
+    @NotBlank
     private String name;
+    @NotBlank
     private String major;
 
-    public Student() {
+    public CreateStudentRequest() {
 
     }
 
-    public Student(int id, String name, String major) {
-        this.id = id;
+    public CreateStudentRequest(String name, String major) {
         this.name = name;
         this.major = major;
-    }
-
-    public int getId() {
-        return this.id;
     }
 
     public String getName() {
@@ -28,10 +23,6 @@ public class Student {
 
     public String getMajor() {
         return this.major;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setName(String name) {
