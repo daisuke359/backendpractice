@@ -2,59 +2,51 @@ package com.daisuke.backendpractice.service;
 
 import com.daisuke.backendpractice.exception.StudentNotFoundException;
 import com.daisuke.backendpractice.model.Student;
+import com.daisuke.backendpractice.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
-    private final List<Student> students = new ArrayList<>();
 
-    public StudentService() {
-        students.add(new Student(1, "Daisuke", "Computer Science"));
-        students.add(new Student(2, "Alice", "AI"));
-        students.add(new Student(3, "Bob", "Software"));
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     public List<Student> getStudents() {
-        return students;
+        return studentRepository.findAll();
     }
 
     public Student getStudent(int id) {
-        for(Student student : students) {
-            if(student.getId()==id) {
-                return student;
-            }
+        Optional<Student> student = studentRepository.findById(id);
+        if(student.isPresent()) {
+            return student.get();
+        } else {
+            throw new StudentNotFoundException(id);
         }
-        throw new StudentNotFoundException(id);
     }
 
 
     public Student addStudent(Student student) {
-        students.add(student);
-        return student;
+        return studentRepository.save(student);
     }
 
 
     public Student deleteStudent(int id) {
-        for(int i=0;i<students.size();i++) {
-            if(students.get(i).getId()==id) {
-                return students.remove(i);
-            }
-        }
-        throw new StudentNotFoundException(id);
+        Student student = getStudent(id);
+        studentRepository.delete(student);
+        return student;
     }
 
 
     public Student updateStudent(int id, Student student) {
-        for(Student s : students) {
-            if(s.getId()==id) {
-                s.setName(student.getName());
-                s.setMajor(student.getMajor());
-                return s;
-            }
-        }
-        throw new StudentNotFoundException(id);
+        Student studentToUpdate = getStudent(id);
+        studentToUpdate.setName(student.getName());
+        studentToUpdate.setMajor(student.getMajor());
+        return studentRepository.save(studentToUpdate);
     }
 }
